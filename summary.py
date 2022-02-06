@@ -56,20 +56,36 @@ for i in f_seqs:
 seqs[0].update_info()
 seqs[1].update_info()
 
-counter =0
-for i in seqs[0].info:
-    if i==1:
-        counter+=1
+# counter =0
+# for i in seqs[0].info:
+#     if i==1:
+#         counter+=1
 
 # Plot
-fig, ax = plt.subplots()
-width=.35
+fig, (ax1, ax2) = plt.subplots(1, 2)
+fig.suptitle('Gene matching comparison')
+ax1.set_title(seqs[0].name)
+ax2.set_title(seqs[1].name)
+width = .35
 
 # get the -1 pos (no match)
 for i, j in enumerate(seqs[0].info):
     if j == -1:
-        plt.axhline(y=i, color='r', linestyle='-')
+        ax1.axhline(y=i, color='r', linestyle='-')
     else:
-        plt.axhline(y=i, color='g', linestyle='-')
+        ax1.axhline(y=i, color='g', linestyle='-')
 
+for i, j in enumerate(seqs[1].info):
+    if j == -1:
+        ax2.axhline(y=i, color='r', linestyle='-')
+    else:
+        ax2.axhline(y=i, color='g', linestyle='-')
+
+# some styling
+ax1.spines['bottom'].set_visible(False)
+ax1.spines['top'].set_visible(False)
+ax2.spines['bottom'].set_visible(False)
+ax2.spines['top'].set_visible(False)
+ax1.axes.get_xaxis().set_visible(False)
+ax2.axes.get_xaxis().set_visible(False)
 plt.show()
